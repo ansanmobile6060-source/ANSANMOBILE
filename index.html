@@ -45,11 +45,11 @@
             <p class="text-gray-300 mb-8 text-lg">수도권 15개 직영점이 책임집니다.</p>
 
             <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
-                <button onclick="scrollToPrice()" class="w-full bg-uplus-magenta hover:bg-pink-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-pink-500/30 transition transform hover:-translate-y-1">
-                    📉 휴대폰 최저가 견적보기
+                <button onclick="scrollToConsult()" class="w-full bg-uplus-magenta hover:bg-pink-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-pink-500/30 transition transform hover:-translate-y-1">
+                    📝 상담 신청하기
                 </button>
-                <button onclick="scrollToConsult()" class="w-full bg-white hover:bg-gray-100 text-gray-900 font-bold py-4 px-6 rounded-xl shadow transition border border-gray-200">
-                    ⚡ 간편 상담 신청하기
+                <button onclick="scrollToPrice()" class="w-full bg-white hover:bg-gray-100 text-gray-900 font-bold py-4 px-6 rounded-xl shadow transition border border-gray-200">
+                    📉 휴대폰 단가표 보기
                 </button>
             </div>
         </div>
@@ -100,7 +100,7 @@
                         무료 견적 및 혜택 확인하기
                     </button>
                     <p class="text-xs text-center text-gray-500 mt-2">
-                        버튼을 누르면 상담 내용이 복사되고 카카오톡이 열립니다.
+                        버튼을 누르면 상담 내용이 전송되고 카카오톡이 열립니다.
                     </p>
                 </div>
             </form>
@@ -144,8 +144,8 @@
 
     <div id="thankYouModal" class="fixed inset-0 z-[60] hidden flex items-center justify-center bg-black/80 px-4">
         <div class="bg-white rounded-2xl w-full max-w-sm p-6 text-center relative animate-fade-in-up">
-            <h3 class="text-xl font-bold mb-2 text-gray-900">상담 신청 준비 완료!</h3>
-            <p class="text-gray-600 mb-6 text-sm">아래 버튼을 누르면 카카오톡이 열립니다.<br>채팅창에 내용을 <span class="font-bold text-pink-600">붙여넣기(Ctrl+V)</span> 해주세요.</p>
+            <h3 class="text-xl font-bold mb-2 text-gray-900">상담 신청 완료!</h3>
+            <p class="text-gray-600 mb-6 text-sm">담당자가 확인 후 빠르게 연락드리겠습니다.<br>아래 버튼을 눌러 카카오톡으로 바로 문의하실 수도 있습니다.</p>
             
             <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6 text-left">
                 <p id="previewText" class="text-xs text-gray-600 whitespace-pre-line font-mono"></p>
@@ -162,16 +162,14 @@
     <script>
         // ==========================================
         // [관리자 수정 영역] 휴대폰 가격 리스트
-        // 여기에 모델명과 금액(숫자만)을 입력하면 자동으로 계산됩니다.
-        // img: 이미지 주소가 있으면 넣고, 없으면 그대로 두세요.
         // ==========================================
         const phoneData = [
             {
                 name: "갤럭시 S24 Ultra",
                 img: "https://placehold.co/400x300/E6007E/FFFFFF?text=Galaxy+S24+Ultra", 
-                price: 1698400,     // 출고가
-                public: 500000,     // 공시지원금
-                store: 400000,      // 유통망지원금 (비밀지원금)
+                price: 1698400,
+                public: 500000,
+                store: 400000,
                 badge: "인기 1위"
             },
             {
@@ -253,19 +251,16 @@
             document.getElementById('consult-section').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 숫자 포맷팅 (콤마 추가)
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
-        // 휴대폰 리스트 렌더링 함수
         function renderPhones() {
             const grid = document.getElementById('phone-grid');
             let html = "";
 
             phoneData.forEach((phone, index) => {
                 const finalPrice = phone.price - phone.public - phone.store;
-                // 할부원금이 0보다 작으면 0원으로 표시
                 const displayFinal = finalPrice < 0 ? 0 : finalPrice;
                 
                 const badgeHtml = phone.badge ? 
@@ -315,34 +310,64 @@
             if (window.lucide) lucide.createIcons();
         }
 
-        // 전역 변수로 메시지 저장
         let kakaoMessage = "";
 
-        // 1. 일반 상담 신청 처리
+        // ==========================================
+        // [수정된 영역] 구글 스프레드시트 연동 전송 처리
+        // ==========================================
         function handleSubmit(event) {
             event.preventDefault();
+            
+            // 입력값 가져오기
             const name = document.getElementById('userName').value;
             const phone = document.getElementById('userPhone').value;
             const model = document.getElementById('userModel').value;
-            
-            showModal(`[간편 상담신청]\n성함: ${name}\n연락처: ${phone}\n관심기종: ${model}`);
+            const submitBtn = event.target.querySelector('button[type="submit"]');
+
+            // 1. 구글 앱스 스크립트 웹 앱 URL (발급받으신 주소 적용)
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzlHH7m6-zJncstGZ2MmnggL9gq7nDHzcVpvnn0Ocm_um7yFdy1K6cBY22Y8ggLvSq20A/exec';
+
+            // 2. 버튼 상태 변경 (중복 클릭 방지)
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = "데이터 전송 중...";
+            submitBtn.disabled = true;
+
+            // 3. 폼 데이터 구성
+            const formData = new URLSearchParams();
+            formData.append('name', name);
+            formData.append('phone', phone);
+            formData.append('model', model);
+
+            // 4. 구글 시트로 데이터 전송
+            fetch(scriptURL, { method: 'POST', body: formData })
+                .then(response => {
+                    // 전송 성공 시 팝업 띄우기
+                    showModal(`[간편 상담신청]\n성함: ${name}\n연락처: ${phone}\n관심기종: ${model}`);
+                    submitBtn.innerText = originalText;
+                    submitBtn.disabled = false;
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert("전송에 실패했습니다. 잠시 후 다시 시도해주세요.");
+                    submitBtn.innerText = originalText;
+                    submitBtn.disabled = false;
+                });
         }
 
-        // 2. 모델별 상담 버튼 클릭 처리
+        // 특정 모델 상담 버튼
         function requestModelConsult(modelName) {
             showModal(`[최저가 견적 문의]\n모델명: ${modelName}\n\n이 모델의 재고와 정확한 월 요금이 궁금합니다.`);
         }
 
-        // 공통 모달 띄우기 함수
+        // 모달창 띄우기
         function showModal(messageText) {
             kakaoMessage = messageText;
             document.getElementById('previewText').innerText = kakaoMessage;
 
-            navigator.clipboard.writeText(kakaoMessage).then(() => {
-                console.log('복사 완료');
-            }).catch(err => {
-                console.error('복사 실패', err);
-            });
+            // 클립보드 복사 (지원 환경에서만 작동)
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(kakaoMessage).catch(err => console.error('복사 실패', err));
+            }
 
             document.getElementById('thankYouModal').classList.remove('hidden');
         }
