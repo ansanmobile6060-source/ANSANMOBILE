@@ -39,17 +39,17 @@
                 안산·시흥·군포 1위 공식 인증점
             </span>
             <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight">
-                안산 공단 근로자분들,<br>
+                안산 외국인 특판 행사<br>
                 퇴근길에 <span class="uplus-magenta">최저가</span> 확인하셨나요?
             </h1>
-            <p class="text-gray-300 mb-8 text-lg">수도권 15개 직영점이 책임집니다.</p>
+            <p class="text-gray-300 mb-8 text-lg">U+특판 전문 대리점</p>
 
             <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
                 <button onclick="scrollToConsult()" class="w-full bg-uplus-magenta hover:bg-pink-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-pink-500/30 transition transform hover:-translate-y-1">
                     📝 상담 신청하기
                 </button>
-                <button onclick="scrollToPrice()" class="w-full bg-white hover:bg-gray-100 text-gray-900 font-bold py-4 px-6 rounded-xl shadow transition border border-gray-200">
-                    📉 휴대폰 단가표 보기
+                <button onclick="goToKakao()" class="w-full bg-[#FEE500] hover:bg-[#FDD835] text-[#3c1e1e] font-bold py-4 px-6 rounded-xl shadow transition border border-transparent flex justify-center items-center gap-2">
+                    <i data-lucide="message-circle" class="w-5 h-5 fill-current"></i> 카카오톡 상담신청
                 </button>
             </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-10">
                 <h2 class="text-3xl font-bold mb-3">🔥 2월 특가 모델 안내</h2>
-                <p class="text-gray-600">안산 15개 직영점만의 <span class="text-pink-600 font-bold">비밀 지원금</span>이 포함된 가격입니다.</p>
+                <p class="text-gray-600">안산 직영점만의 <span class="text-pink-600 font-bold">비밀 지원금</span>이 포함된 가격입니다.</p>
                 <p class="text-xs text-gray-400 mt-2">* 제휴카드 및 결합 할인 미포함 순수 기기값 기준 (추가 할인 가능)</p>
             </div>
 
@@ -88,19 +88,19 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-400 mb-1">관심 기종</label>
-                        <select id="userModel" class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white">
-                            <option>상담 후 결정</option>
-                            <option>아이폰 16 시리즈</option>
-                            <option>갤럭시 S24 시리즈</option>
-                            <option>Z 플립/폴드 6</option>
-                            <option>효도폰/키즈폰</option>
+                        <select id="userModel" class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:border-uplus-magenta transition">
+                            <option value="상담 후 결정">상담 후 결정</option>
+                            <option value="아이폰 16 시리즈">아이폰 16 시리즈</option>
+                            <option value="갤럭시 S24 시리즈">갤럭시 S24 시리즈</option>
+                            <option value="Z 플립/폴드 6">Z 플립/폴드 6</option>
+                            <option value="효도폰/키즈폰">효도폰/키즈폰</option>
                         </select>
                     </div>
                     <button type="submit" class="w-full bg-uplus-gradient hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg mt-4 transition transform active:scale-95">
                         무료 견적 및 혜택 확인하기
                     </button>
                     <p class="text-xs text-center text-gray-500 mt-2">
-                        버튼을 누르면 상담 내용이 전송되고 카카오톡이 열립니다.
+                        버튼을 누르면 구글 시트로 접수되며 카카오톡이 열립니다.
                     </p>
                 </div>
             </form>
@@ -164,80 +164,16 @@
         // [관리자 수정 영역] 휴대폰 가격 리스트
         // ==========================================
         const phoneData = [
-            {
-                name: "갤럭시 S24 Ultra",
-                img: "https://placehold.co/400x300/E6007E/FFFFFF?text=Galaxy+S24+Ultra", 
-                price: 1698400,
-                public: 500000,
-                store: 400000,
-                badge: "인기 1위"
-            },
-            {
-                name: "갤럭시 S24+",
-                img: "https://placehold.co/400x300/333333/FFFFFF?text=Galaxy+S24+",
-                price: 1353000,
-                public: 480000,
-                store: 350000,
-                badge: ""
-            },
-            {
-                name: "갤럭시 S24",
-                img: "https://placehold.co/400x300/333333/FFFFFF?text=Galaxy+S24",
-                price: 1155000,
-                public: 450000,
-                store: 300000,
-                badge: "특가"
-            },
-            {
-                name: "아이폰 16 Pro Max",
-                img: "https://placehold.co/400x300/E6007E/FFFFFF?text=iPhone+16+Pro+Max",
-                price: 1900000,
-                public: 200000,
-                store: 300000,
-                badge: "재고보유"
-            },
-            {
-                name: "아이폰 16 Pro",
-                img: "https://placehold.co/400x300/333333/FFFFFF?text=iPhone+16+Pro",
-                price: 1550000,
-                public: 200000,
-                store: 300000,
-                badge: ""
-            },
-            {
-                name: "아이폰 16",
-                img: "https://placehold.co/400x300/333333/FFFFFF?text=iPhone+16",
-                price: 1250000,
-                public: 250000,
-                store: 350000,
-                badge: "학생추천"
-            },
-            {
-                name: "Z 플립 6",
-                img: "https://placehold.co/400x300/E6007E/FFFFFF?text=Z+Flip+6",
-                price: 1400000,
-                public: 600000,
-                store: 400000,
-                badge: "지원금대박"
-            },
-            {
-                name: "Z 폴드 6",
-                img: "https://placehold.co/400x300/333333/FFFFFF?text=Z+Fold+6",
-                price: 2100000,
-                public: 500000,
-                store: 400000,
-                badge: ""
-            },
-            {
-                name: "갤럭시 A25 (효도폰)",
-                img: "https://placehold.co/400x300/333333/FFFFFF?text=Galaxy+A25",
-                price: 449000,
-                public: 449000,
-                store: 0,
-                badge: "기기값 0원"
-            }
+            { name: "갤럭시 S24 Ultra", img: "https://placehold.co/400x300/E6007E/FFFFFF?text=Galaxy+S24+Ultra", price: 1698400, public: 500000, store: 400000, badge: "인기 1위" },
+            { name: "갤럭시 S24+", img: "https://placehold.co/400x300/333333/FFFFFF?text=Galaxy+S24+", price: 1353000, public: 480000, store: 350000, badge: "" },
+            { name: "갤럭시 S24", img: "https://placehold.co/400x300/333333/FFFFFF?text=Galaxy+S24", price: 1155000, public: 450000, store: 300000, badge: "특가" },
+            { name: "아이폰 16 Pro Max", img: "https://placehold.co/400x300/E6007E/FFFFFF?text=iPhone+16+Pro+Max", price: 1900000, public: 200000, store: 300000, badge: "재고보유" },
+            { name: "아이폰 16 Pro", img: "https://placehold.co/400x300/333333/FFFFFF?text=iPhone+16+Pro", price: 1550000, public: 200000, store: 300000, badge: "" },
+            { name: "아이폰 16", img: "https://placehold.co/400x300/333333/FFFFFF?text=iPhone+16", price: 1250000, public: 250000, store: 350000, badge: "학생추천" },
+            { name: "Z 플립 6", img: "https://placehold.co/400x300/E6007E/FFFFFF?text=Z+Flip+6", price: 1400000, public: 600000, store: 400000, badge: "지원금대박" },
+            { name: "Z 폴드 6", img: "https://placehold.co/400x300/333333/FFFFFF?text=Z+Fold+6", price: 2100000, public: 500000, store: 400000, badge: "" },
+            { name: "갤럭시 A25 (효도폰)", img: "https://placehold.co/400x300/333333/FFFFFF?text=Galaxy+A25", price: 449000, public: 449000, store: 0, badge: "기기값 0원" }
         ];
-        // ==========================================
 
         document.addEventListener("DOMContentLoaded", function() {
             if (window.lucide) lucide.createIcons();
@@ -313,35 +249,29 @@
         let kakaoMessage = "";
 
         // ==========================================
-        // [수정된 영역] 구글 스프레드시트 연동 전송 처리
+        // 구글 시트 폼 제출 함수
         // ==========================================
         function handleSubmit(event) {
             event.preventDefault();
             
-            // 입력값 가져오기
             const name = document.getElementById('userName').value;
             const phone = document.getElementById('userPhone').value;
             const model = document.getElementById('userModel').value;
             const submitBtn = event.target.querySelector('button[type="submit"]');
 
-            // 1. 구글 앱스 스크립트 웹 앱 URL (발급받으신 주소 적용)
             const scriptURL = 'https://script.google.com/macros/s/AKfycbzlHH7m6-zJncstGZ2MmnggL9gq7nDHzcVpvnn0Ocm_um7yFdy1K6cBY22Y8ggLvSq20A/exec';
 
-            // 2. 버튼 상태 변경 (중복 클릭 방지)
             const originalText = submitBtn.innerText;
             submitBtn.innerText = "데이터 전송 중...";
             submitBtn.disabled = true;
 
-            // 3. 폼 데이터 구성
             const formData = new URLSearchParams();
             formData.append('name', name);
             formData.append('phone', phone);
             formData.append('model', model);
 
-            // 4. 구글 시트로 데이터 전송
             fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => {
-                    // 전송 성공 시 팝업 띄우기
                     showModal(`[간편 상담신청]\n성함: ${name}\n연락처: ${phone}\n관심기종: ${model}`);
                     submitBtn.innerText = originalText;
                     submitBtn.disabled = false;
@@ -354,17 +284,48 @@
                 });
         }
 
-        // 특정 모델 상담 버튼
+        // ==========================================
+        // [수정된 영역] 특정 모델 상담 버튼 클릭 시 자동 입력 UX 적용
+        // ==========================================
         function requestModelConsult(modelName) {
-            showModal(`[최저가 견적 문의]\n모델명: ${modelName}\n\n이 모델의 재고와 정확한 월 요금이 궁금합니다.`);
+            // 1. 하단 폼으로 부드럽게 스크롤
+            scrollToConsult();
+            
+            // 2. 폼의 Select box 가져오기
+            const selectBox = document.getElementById('userModel');
+            
+            // 3. Select box에 해당 모델이 없으면 옵션에 추가 (있으면 통과)
+            let optionExists = false;
+            for(let i=0; i < selectBox.options.length; i++) {
+                if(selectBox.options[i].value === modelName) {
+                    optionExists = true;
+                    break;
+                }
+            }
+            if(!optionExists) {
+                const newOption = document.createElement("option");
+                newOption.value = modelName;
+                newOption.text = modelName;
+                selectBox.add(newOption);
+            }
+            
+            // 4. 클릭한 기종으로 자동 선택
+            selectBox.value = modelName;
+            
+            // 5. 고객이 바로 이름을 칠 수 있도록 이름 입력창에 포커스 (강조 효과 포함)
+            setTimeout(() => {
+                const nameInput = document.getElementById('userName');
+                nameInput.focus();
+                nameInput.classList.add('ring-2', 'ring-pink-500'); // 분홍색 테두리로 시선 집중
+                setTimeout(() => nameInput.classList.remove('ring-2', 'ring-pink-500'), 1500);
+            }, 500);
         }
 
-        // 모달창 띄우기
+        // 카카오톡 모달 및 이동
         function showModal(messageText) {
             kakaoMessage = messageText;
             document.getElementById('previewText').innerText = kakaoMessage;
 
-            // 클립보드 복사 (지원 환경에서만 작동)
             if (navigator.clipboard) {
                 navigator.clipboard.writeText(kakaoMessage).catch(err => console.error('복사 실패', err));
             }
@@ -373,13 +334,15 @@
         }
 
         function goToKakao() {
-            const kakaoUrl = "http://pf.kakao.com/_iVyhX/chat";
+            // 점장님 카카오톡 채널 URL로 변경해서 사용하세요.
+            const kakaoUrl = "http://pf.kakao.com/_iVyhX/chat"; 
             window.open(kakaoUrl, '_blank');
         }
 
         function closeModal() {
             document.getElementById('thankYouModal').classList.add('hidden');
             document.getElementById('consultForm').reset();
+            document.getElementById('userModel').value = "상담 후 결정"; // 기종 초기화
         }
         
         document.getElementById('thankYouModal').addEventListener('click', function(e) {
