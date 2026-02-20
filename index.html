@@ -55,6 +55,59 @@
         </div>
     </section>
 
+    <section id="benefits-section" class="py-16 bg-white border-b border-gray-100">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <span class="bg-pink-100 text-pink-600 font-bold px-3 py-1 rounded-full text-sm mb-3 inline-block">스페셜 이벤트</span>
+                <h2 class="text-3xl font-bold mb-3">🎁 안산 직영점 단독 특별 혜택</h2>
+                <p class="text-gray-600">오직 여기서만 받을 수 있는 완벽한 지원 혜택을 확인하세요!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-lg transition-all text-center flex flex-col items-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-pink-500"></div>
+                    <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mb-5 text-pink-600">
+                        <i data-lucide="smartphone" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">쓰던 기기 그대로<br>(SIM MNP)</h3>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">쓰던 스마트폰 그대로,<br>유심만 당사로 이동해서 개통 시</p>
+                    <div class="mt-auto bg-white border-2 border-pink-200 text-pink-600 font-black text-xl py-4 px-4 rounded-xl w-full">
+                        현금 10만원 증정
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-lg transition-all text-center flex flex-col items-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-blue-500"></div>
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-5 text-blue-600">
+                        <i data-lucide="wallet" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">선불폰 신규 가입<br>특별 지원</h3>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">초기 비용 부담 제로!<br>외국인 고객님을 위한 맞춤 혜택</p>
+                    <div class="mt-auto bg-white border-2 border-blue-200 text-blue-600 font-black text-lg py-4 px-4 rounded-xl w-full tracking-tight">
+                        유심비(7,700)+요금(1만) 지원
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-lg transition-all text-center flex flex-col items-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-purple-500"></div>
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-5 text-purple-600">
+                        <i data-lucide="tv" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-gray-900">인터넷 + TV<br>동시 가입</h3>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">집에서도 빠르고 쾌적하게!<br>결합하고 역대급 사은품 받기</p>
+                    <div class="mt-auto bg-white border-2 border-purple-200 text-purple-600 font-black text-xl py-4 px-4 rounded-xl w-full">
+                        최대 70만원 지원
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-10 text-center">
+                <button onclick="scrollToConsult()" class="inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-bold px-8 py-4 rounded-full transition shadow-lg">
+                    위 혜택으로 간편 상담받기 <i data-lucide="arrow-down-circle" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </section>
     <section id="price-section" class="py-16 bg-gray-50">
         <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-10">
@@ -94,6 +147,9 @@
                             <option value="갤럭시 S24 시리즈">갤럭시 S24 시리즈</option>
                             <option value="Z 플립/폴드 6">Z 플립/폴드 6</option>
                             <option value="효도폰/키즈폰">효도폰/키즈폰</option>
+                            <option value="SIM MNP 10만 혜택">SIM MNP 10만 혜택</option>
+                            <option value="선불폰 신규가입">선불폰 신규가입</option>
+                            <option value="인터넷+TV 가입">인터넷+TV 가입</option>
                         </select>
                     </div>
                     <button type="submit" class="w-full bg-uplus-gradient hover:opacity-90 text-white font-bold py-4 rounded-xl shadow-lg mt-4 transition transform active:scale-95">
@@ -160,9 +216,6 @@
     </div>
 
     <script>
-        // ==========================================
-        // [관리자 수정 영역] 휴대폰 가격 리스트
-        // ==========================================
         const phoneData = [
             { name: "갤럭시 S24 Ultra", img: "https://placehold.co/400x300/E6007E/FFFFFF?text=Galaxy+S24+Ultra", price: 1698400, public: 500000, store: 400000, badge: "인기 1위" },
             { name: "갤럭시 S24+", img: "https://placehold.co/400x300/333333/FFFFFF?text=Galaxy+S24+", price: 1353000, public: 480000, store: 350000, badge: "" },
@@ -248,9 +301,6 @@
 
         let kakaoMessage = "";
 
-        // ==========================================
-        // 구글 시트 폼 제출 함수
-        // ==========================================
         function handleSubmit(event) {
             event.preventDefault();
             
@@ -284,17 +334,11 @@
                 });
         }
 
-        // ==========================================
-        // [수정된 영역] 특정 모델 상담 버튼 클릭 시 자동 입력 UX 적용
-        // ==========================================
         function requestModelConsult(modelName) {
-            // 1. 하단 폼으로 부드럽게 스크롤
             scrollToConsult();
             
-            // 2. 폼의 Select box 가져오기
             const selectBox = document.getElementById('userModel');
             
-            // 3. Select box에 해당 모델이 없으면 옵션에 추가 (있으면 통과)
             let optionExists = false;
             for(let i=0; i < selectBox.options.length; i++) {
                 if(selectBox.options[i].value === modelName) {
@@ -309,19 +353,16 @@
                 selectBox.add(newOption);
             }
             
-            // 4. 클릭한 기종으로 자동 선택
             selectBox.value = modelName;
             
-            // 5. 고객이 바로 이름을 칠 수 있도록 이름 입력창에 포커스 (강조 효과 포함)
             setTimeout(() => {
                 const nameInput = document.getElementById('userName');
                 nameInput.focus();
-                nameInput.classList.add('ring-2', 'ring-pink-500'); // 분홍색 테두리로 시선 집중
+                nameInput.classList.add('ring-2', 'ring-pink-500'); 
                 setTimeout(() => nameInput.classList.remove('ring-2', 'ring-pink-500'), 1500);
             }, 500);
         }
 
-        // 카카오톡 모달 및 이동
         function showModal(messageText) {
             kakaoMessage = messageText;
             document.getElementById('previewText').innerText = kakaoMessage;
@@ -334,7 +375,6 @@
         }
 
         function goToKakao() {
-            // 점장님 카카오톡 채널 URL로 변경해서 사용하세요.
             const kakaoUrl = "http://pf.kakao.com/_iVyhX/chat"; 
             window.open(kakaoUrl, '_blank');
         }
@@ -342,7 +382,7 @@
         function closeModal() {
             document.getElementById('thankYouModal').classList.add('hidden');
             document.getElementById('consultForm').reset();
-            document.getElementById('userModel').value = "상담 후 결정"; // 기종 초기화
+            document.getElementById('userModel').value = "상담 후 결정"; 
         }
         
         document.getElementById('thankYouModal').addEventListener('click', function(e) {
