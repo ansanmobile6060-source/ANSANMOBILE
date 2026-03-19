@@ -23,7 +23,17 @@
         .moyo-chip.active { background-color: #FDF2F8; border-color: #E6007E; color: #E6007E; font-weight: 700; }
     </style>
 </head>
-<body class="antialiased selection:bg-pink-100 selection:text-pink-900">
+<body class="antialiased selection:bg-pink-100 selection:text-pink-900 relative">
+
+    <div class="fixed top-[70px] right-0 w-full max-w-2xl left-1/2 -translate-x-1/2 pointer-events-none z-[100]">
+        <button onclick="openKakaoChat()" class="absolute top-0 right-4 pointer-events-auto bg-[#FEE500] text-[#391B1B] w-12 h-12 rounded-full flex items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.15)] border-2 border-white hover:scale-105 transition-transform" aria-label="오픈채팅 상담">
+            <i data-lucide="message-circle" class="w-6 h-6 fill-current"></i>
+            <span class="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-red-500 border-2 border-white"></span>
+            </span>
+        </button>
+    </div>
 
     <div id="main-page" class="w-full min-h-screen max-w-2xl mx-auto bg-gray-50 relative pb-24 shadow-sm">
         
@@ -394,6 +404,12 @@
             formSource: '' 
         };
 
+        // ★ 카카오톡 오픈채팅 이동 함수 및 안내 팝업 문구 수정
+        function openKakaoChat() {
+            alert("✅ 주기적으로 행사 가격과 특가 단말기를 안내받으실 수 있는 비밀 오픈채팅방입니다.\n\n🔒 채팅방 입장 코드는 [ 1019 ] 입니다.\n\n확인을 누르시면 채팅방으로 연결됩니다.");
+            window.open("https://open.kakao.com/o/g6sKp9li", "_blank");
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
             lucide.createIcons();
             
@@ -447,7 +463,6 @@
         }
 
         function renderPhoneList(category) {
-            // ★ 선택된 탭이 '청소년' 또는 '시니어'를 포함하는지 확인하여 메인 페이지 조건 문구를 바꿉니다.
             const isSpecialGroup = category.includes('청소년') || category.includes('시니어');
             document.getElementById('main-cond-1').innerHTML = isSpecialGroup ? '맞춤 요금제<br>바로 적용' : '85요금제<br>딱 6개월';
             document.getElementById('main-cond-2').innerHTML = isSpecialGroup ? '유지 부담<br>ZERO' : '6개월 후<br>자유변경';
@@ -525,7 +540,6 @@
                 lucide.createIcons();
             }
 
-            // ★ 클릭한 기기가 '청소년 시니어' 그룹인지 확인하여 상세페이지 요금제 문구를 바꿉니다.
             const isSpecialGroup = models[0].group.includes('청소년') || models[0].group.includes('시니어');
             
             document.getElementById('detail-cond-1-title').innerText = isSpecialGroup 
